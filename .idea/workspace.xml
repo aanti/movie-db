@@ -67,8 +67,8 @@
       <file leaf-file-name="README.md" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/README.md">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="0" column="88" selection-start-line="0" selection-start-column="88" selection-end-line="0" selection-end-column="88" />
+            <state vertical-scroll-proportion="0.5314685">
+              <caret line="16" column="0" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -503,7 +503,13 @@
       <option name="project" value="LOCAL" />
       <updated>1518810970390</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="Simple readme modification">
+      <created>1518811160441</created>
+      <option name="number" value="00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1518811160441</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -552,7 +558,8 @@
     <MESSAGE value="Implementation of fetchable list (with 'Load more' button)" />
     <MESSAGE value="No error message when searchText.length &lt; 2" />
     <MESSAGE value="Eslint warnings fixed" />
-    <option name="LAST_COMMIT_MESSAGE" value="Eslint warnings fixed" />
+    <MESSAGE value="Simple readme modification" />
+    <option name="LAST_COMMIT_MESSAGE" value="Simple readme modification" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -686,8 +693,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="88" selection-start-line="0" selection-start-column="88" selection-end-line="0" selection-end-column="88" />
+        <state vertical-scroll-proportion="0.5314685">
+          <caret line="16" column="0" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
           <folding />
         </state>
       </provider>
