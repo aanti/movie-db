@@ -9,7 +9,7 @@ function sendRequest (path, params = {}) {
   return axios.get(baseUrl + path, { params: { ...params, api_key } })
 }
 
-export const search = (query) => sendRequest('/search/movie', { query })
+export const search = (query, page = 1) => sendRequest('/search/movie', { query, page })
 
 export const getMovie = (id) => sendRequest(`/movie/${id}`)
 

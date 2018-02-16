@@ -48,14 +48,18 @@ export const ItemArray = ({ children, chipMode }) => (
   </FlexHorizontal>
 )
 
-export const ItemComponent = ({ label = '', children, chipMode, ...rest }) => (
+const SingleItem = ({ component, children, ...rest }) => component
+  ? React.createElement(component, rest, children)
+  : children
+
+export const ItemComponent = ({ label = '', children, chipMode, component, ...rest }) => (
   <LabeledItem {...rest}>
     <div>{label}</div>
     <div>
       {
         (Array.isArray(children))
           ? <ItemArray chipMode={chipMode}>{children}</ItemArray>
-          : children
+          : <SingleItem component={component}>{children}</SingleItem>
       }
     </div>
   </LabeledItem>

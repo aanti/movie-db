@@ -40,6 +40,11 @@ const CenteredDiv = styled.div`
   text-align: center;
 `
 
+const ListContainer = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+`
+
 const NoResults = ({ searchPhrase }) => (
   <NoResultsContainer>
     <div>
@@ -49,21 +54,28 @@ const NoResults = ({ searchPhrase }) => (
   </NoResultsContainer>
 )
 
-const MovieList = ({ data, searchPhrase, onClick }) => (
+const MovieList = ({ data, searchPhrase, onClick, onLoadMoreClick }) => (
   <div>
     <div>Results for {<b>{searchPhrase}</b>}</div>
-    {data.map((d, i) => <ListItem data={d} key={i} index={i} onClick={() => onClick(d)} />)}
+    <ListContainer>
+      {data.map((d, i) => <ListItem data={d} key={i} index={i} onClick={() => onClick(d)} />)}
+    </ListContainer>
     <CenteredDiv>
-      <FlatButton label="I want more!" labelPosition="before" icon={<RightIcon />} />
+      <FlatButton
+        label="I want more!"
+        labelPosition="before"
+        icon={<RightIcon />}
+        onClick={onLoadMoreClick}
+      />
     </CenteredDiv>
   </div>
 )
 
-const List = ({ searchPhrase, data = [], onClick }) => (
+const List = ({ searchPhrase, data = [], onClick, onLoadMoreClick }) => (
   <Container>
     {
       (data.length)
-        ? <MovieList searchPhrase={searchPhrase} data={data} onClick={onClick} />
+        ? <MovieList searchPhrase={searchPhrase} data={data} onClick={onClick} onLoadMoreClick={onLoadMoreClick} />
         : <NoResults searchPhrase={searchPhrase} />
     }
   </Container>

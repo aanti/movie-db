@@ -27,6 +27,17 @@ const StyledIconDiv = styled.div`
   z-index: 10;
 `
 
+const StyledLink = styled.a`
+  color: #555555;
+  text-decoration: none;
+  font-weight: 500;
+  :hover {
+    color: #b6c618;
+  }
+`
+
+const Link = ({ children }) => <StyledLink href={children} target="_blank">{children}</StyledLink>
+
 class Details extends Component {
   constructor () {
     super()
@@ -66,7 +77,7 @@ class Details extends Component {
           <Item label="overview">{data.overview}</Item>
           <Item label="original language">{data.original_Language}</Item>
           <Item label="release date">{data.release_date}</Item>
-          <Item label="homepage">{data.homepage}</Item>
+          <Item label="homepage" component={Link}>{data.homepage}</Item>
           <Item label="production countries">{data.production_countries}</Item>
           <Item label="production companies">{data.production_companies}</Item>
         </FlexHorizontal>

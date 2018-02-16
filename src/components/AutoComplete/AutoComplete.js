@@ -7,7 +7,9 @@ import AutoCompleteMUI from 'material-ui/AutoComplete'
 import MenuItem from 'material-ui/MenuItem'
 import CircularProgress from 'material-ui/CircularProgress'
 import RaisedButton from 'material-ui/RaisedButton'
+import IconButton from 'material-ui/IconButton'
 import Paper from 'material-ui/Paper'
+import ClearIcon from 'material-ui/svg-icons/content/clear'
 
 const Container = styled(Paper)`
   padding: 20px;
@@ -37,6 +39,14 @@ const SearchDiv = styled.div`
   width: 340px;
 `
 
+const CloseIconDiv = styled.div`
+  position: absolute;
+  left: -50px;
+  svg {
+    fill: gray !important;
+  }
+`
+
 function getPrimaryText (title) {
   return <PrimaryText>{title}</PrimaryText>
 }
@@ -57,53 +67,34 @@ function filterDataSource (searchText) {
   return searchText !== ''
 }
 
-class AutoComplete extends Component {
-  constructor () {
-    super()
-    this.state = {
-      searchText: ''
-    }
-
-    this.handleUpdateInput = this.handleUpdateInput.bind(this)
-    this.handleButtonClick = this.handleButtonClick.bind(this)
-  }
-
-  handleUpdateInput (searchText, dataset, { source }) {
-    this.setState({
-      searchText: source === 'change' ? searchText : ''
-    }, () => { searchText && source === 'change' && this.props.onUpdateInput(searchText) })
-  }
-
-  handleButtonClick () {
-    const { onButtonClick } = this.props
-    const { searchText } = this.state
-    onButtonClick(searchText)
-  }
-
-  render () {
-    const { className, fetching = false, dataSource = [], ...rest } = this.props
-    return (
-      <Container className={className}>
-        <SearchDiv>
-          <AutoCompleteMUI
-            dataSource={dataSource.map(getMenuItem)}
-            {...rest}
-            searchText={this.state.searchText}
-            hintText="Start writing some text here"
-            filter={filterDataSource}
-            onUpdateInput={this.handleUpdateInput}
-            fullWidth
-          />
-          {
-            (fetching) && <StyledLoader size={24} />
-          }
-        </SearchDiv>
-        <RaisedButton onClick={this.handleButtonClick}>FIND</RaisedButton>
-      </Container>
-    )
-  }
+const AutoComplete = ({ className, fetching, dataSource = [], onButtonClick, onClear, searchText, ...rest }) => {
+  console.log('Autocomplete rest', rest)
+  return (
+    <Container className={className}>
+      {
+        (!!searchText.length) && (
+          <CloseIconDiv>
+            <IconButton onClick={onClear}><ClearIcon /></IconButton>
+          </CloseIconDiv>
+        )
+      }
+      <SearchDiv>
+        <AutoCompleteMUI
+          {...rest}
+          searchText={searchText}
+          dataSource={dataSource.map(getMenuItem)}
+          hintText="Start writing some text here"
+          filter={filterDataSource}
+          fullWidth
+        />
+        {
+          (fetching) && <StyledLoader size={24} />
+        }
+      </SearchDiv>
+      <RaisedButton onClick={onButtonClick}>FIND</RaisedButton>
+    </Container>
+  )
 }
-
 
 export default styled(AutoComplete)`
   position: relative;

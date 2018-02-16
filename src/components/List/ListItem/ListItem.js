@@ -6,9 +6,11 @@ import styled from 'styled-components'
 import Item from '../../Item/Item'
 
 const Container = styled.div`
-  padding: 20px;
+  padding: 10px;
   background-color: lightgray;
-  margin: 10px 0;
+  margin: 10px;
+  flex: 1 1 300px;
+  max-height: 200px;
 
   :hover {
     background-color: #b3b3b3;
@@ -16,12 +18,18 @@ const Container = styled.div`
   }
 `
 
-const ListItem = ({ data: { title, release_date, overview }, index, onClick }) => (
+const Ellipsed = styled.div`
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  max-width: 200px;
+`
+
+const ListItem = ({ data: { title, release_date, overview }, onClick }) => (
   <Container onClick={onClick}>
-    <div>{index + 1}.</div>
     <Item primary>{title}</Item>
     <Item label="year">{release_date.split('-')[0]}</Item>
-    <Item label="overview" chipMode>{overview}</Item>
+    <Item label="overview" component={Ellipsed}>{overview}</Item>
   </Container>
 )
 
