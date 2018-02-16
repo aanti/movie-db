@@ -3,9 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="ec3b78db-c267-476a-aefe-bce2b07cf25a" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/App.js" afterPath="$PROJECT_DIR$/src/App.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/AutoComplete/AutoComplete.js" afterPath="$PROJECT_DIR$/src/components/AutoComplete/AutoComplete.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/MainSection/MainSection.js" afterPath="$PROJECT_DIR$/src/components/MainSection/MainSection.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/List/ListItem/ListItem.js" afterPath="$PROJECT_DIR$/src/components/List/ListItem/ListItem.js" />
     </list>
     <ignored path="movie-db.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -26,10 +24,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="App.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="App.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/App.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.50373137">
+            <state vertical-scroll-proportion="-69.666664">
               <caret line="132" column="48" selection-start-line="132" selection-start-column="48" selection-end-line="132" selection-end-column="48" />
               <folding />
             </state>
@@ -49,21 +47,19 @@
       <file leaf-file-name="List.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/List/List.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-13.833333">
-              <caret line="79" column="22" selection-start-line="79" selection-start-column="22" selection-end-line="79" selection-end-column="22" />
+            <state vertical-scroll-proportion="-6.8333335">
+              <caret line="64" column="5" selection-start-line="64" selection-start-column="5" selection-end-line="64" selection-end-column="5" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ListItem.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="ListItem.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/components/List/ListItem/ListItem.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-11.194445">
-              <caret line="32" column="14" selection-start-line="32" selection-start-column="14" selection-end-line="32" selection-end-column="14" />
-              <folding>
-                <marker date="1518810611183" expanded="true" signature="771:826" placeholder="{...}" />
-              </folding>
+            <state vertical-scroll-proportion="0.03544776">
+              <caret line="10" column="24" selection-start-line="10" selection-start-column="24" selection-end-line="10" selection-end-column="24" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -143,7 +139,6 @@
         <option value="$PROJECT_DIR$/src/hoc/fetching.js" />
         <option value="$PROJECT_DIR$/src/hoc/renderIfHasData.js" />
         <option value="$PROJECT_DIR$/src/index.css" />
-        <option value="$PROJECT_DIR$/src/components/List/ListItem/ListItem.js" />
         <option value="$PROJECT_DIR$/src/components/Item/Item.js" />
         <option value="$PROJECT_DIR$/src/api.js" />
         <option value="$PROJECT_DIR$/src/components/Details/Details.js" />
@@ -153,6 +148,7 @@
         <option value="$PROJECT_DIR$/src/components/MainSection/MainSection.js" />
         <option value="$PROJECT_DIR$/src/components/AutoComplete/AutoComplete.js" />
         <option value="$PROJECT_DIR$/src/App.js" />
+        <option value="$PROJECT_DIR$/src/components/List/ListItem/ListItem.js" />
       </list>
     </option>
   </component>
@@ -464,7 +460,13 @@
       <option name="project" value="LOCAL" />
       <updated>1518816805486</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="[Refactor] Unused button callback removed (no more &quot;Find&quot; button)">
+      <created>1518817249394</created>
+      <option name="number" value="00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1518817249394</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -518,7 +520,8 @@
     <MESSAGE value="Simple readme modification (v. 3)" />
     <MESSAGE value="Theme colors change and no more &quot;Find&quot; button" />
     <MESSAGE value="Refactor (one big stateful parent component)" />
-    <option name="LAST_COMMIT_MESSAGE" value="Refactor (one big stateful parent component)" />
+    <MESSAGE value="[Refactor] Unused button callback removed (no more &quot;Find&quot; button)" />
+    <option name="LAST_COMMIT_MESSAGE" value="[Refactor] Unused button callback removed (no more &quot;Find&quot; button)" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -585,16 +588,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/List/ListItem/ListItem.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-11.194445">
-          <caret line="32" column="14" selection-start-line="32" selection-start-column="14" selection-end-line="32" selection-end-column="14" />
-          <folding>
-            <marker date="1518810611183" expanded="true" signature="771:826" placeholder="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/Details/Details.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -621,10 +614,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/List/List.js">
+    <entry file="file://$PROJECT_DIR$/src/components/AutoComplete/AutoComplete.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-13.833333">
-          <caret line="79" column="22" selection-start-line="79" selection-start-column="22" selection-end-line="79" selection-end-column="22" />
+        <state vertical-scroll-proportion="-7.5">
+          <caret line="104" column="36" selection-start-line="104" selection-start-column="36" selection-end-line="104" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/App.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-69.666664">
+          <caret line="132" column="48" selection-start-line="132" selection-start-column="48" selection-end-line="132" selection-end-column="48" />
           <folding />
         </state>
       </provider>
@@ -637,18 +638,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/AutoComplete/AutoComplete.js">
+    <entry file="file://$PROJECT_DIR$/src/components/List/List.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-7.5">
-          <caret line="104" column="36" selection-start-line="104" selection-start-column="36" selection-end-line="104" selection-end-column="36" />
+        <state vertical-scroll-proportion="-6.8333335">
+          <caret line="64" column="5" selection-start-line="64" selection-start-column="5" selection-end-line="64" selection-end-column="5" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/App.js">
+    <entry file="file://$PROJECT_DIR$/src/components/List/ListItem/ListItem.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.50373137">
-          <caret line="132" column="48" selection-start-line="132" selection-start-column="48" selection-end-line="132" selection-end-column="48" />
+        <state vertical-scroll-proportion="0.03544776">
+          <caret line="10" column="24" selection-start-line="10" selection-start-column="24" selection-end-line="10" selection-end-column="24" />
           <folding />
         </state>
       </provider>

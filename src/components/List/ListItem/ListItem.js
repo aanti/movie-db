@@ -8,7 +8,7 @@ import Item from '../../Item/Item'
 const Container = styled.div`
   padding: 10px;
   background-color: lightgray;
-  margin: 10px;
+  margin: 5px 10px 5px 0;
   flex: 1 1 300px;
   max-height: 200px;
 
