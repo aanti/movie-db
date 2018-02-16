@@ -13,4 +13,6 @@ npm install
 npm start
 ````
 
-Written in React, composed of [Material-UI](http://www.material-ui.com/#/) components, styled with [styled-components](https://www.styled-components.com).
+Written in React with help of [Webpack](https://webpack.js.org/) module bunder,  [axios](https://github.com/axios/axios) for HTTP requests, composed of [Material-UI](http://www.material-ui.com/#/) components, styled with awesome [styled-components](https://www.styled-components.com) <3
+
+Enjoy!
