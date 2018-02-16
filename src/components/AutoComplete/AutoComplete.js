@@ -67,34 +67,31 @@ function filterDataSource (searchText) {
   return searchText !== ''
 }
 
-const AutoComplete = ({ className, fetching, dataSource = [], onButtonClick, onClear, searchText, ...rest }) => {
-  console.log('Autocomplete rest', rest)
-  return (
-    <Container className={className}>
+const AutoComplete = ({ className, fetching, dataSource = [], onButtonClick, onClear, searchText, ...rest }) => (
+  <Container className={className}>
+    {
+      (!!searchText.length) && (
+        <CloseIconDiv>
+          <IconButton onClick={onClear}><ClearIcon /></IconButton>
+        </CloseIconDiv>
+      )
+    }
+    <SearchDiv>
+      <AutoCompleteMUI
+        {...rest}
+        searchText={searchText}
+        dataSource={dataSource.map(getMenuItem)}
+        hintText="Start writing some text here"
+        filter={filterDataSource}
+        fullWidth
+      />
       {
-        (!!searchText.length) && (
-          <CloseIconDiv>
-            <IconButton onClick={onClear}><ClearIcon /></IconButton>
-          </CloseIconDiv>
-        )
+        (fetching) && <StyledLoader size={24} />
       }
-      <SearchDiv>
-        <AutoCompleteMUI
-          {...rest}
-          searchText={searchText}
-          dataSource={dataSource.map(getMenuItem)}
-          hintText="Start writing some text here"
-          filter={filterDataSource}
-          fullWidth
-        />
-        {
-          (fetching) && <StyledLoader size={24} />
-        }
-      </SearchDiv>
-      <RaisedButton onClick={onButtonClick}>FIND</RaisedButton>
-    </Container>
-  )
-}
+    </SearchDiv>
+    <RaisedButton onClick={onButtonClick}>FIND</RaisedButton>
+  </Container>
+)
 
 export default styled(AutoComplete)`
   position: relative;

@@ -5,13 +5,12 @@ import TextField from 'material-ui/TextField'
 
 import AutoComplete from './components/AutoComplete/AutoComplete'
 import FetchedDetails from './components/Details/Details'
-import FetchedList from './components/List/List'
+import List from './components/List/List'
 
 import fetching from './hoc/fetching'
 import { search, getMovie, getImages } from './api'
 
 const Details = fetching(FetchedDetails)
-const List = fetching(FetchedList)
 
 const Header = styled.div`
   background-color: gray;
@@ -121,11 +120,22 @@ class App extends Component {
   }
 
   handleAutoCompleteSuccess ({ data: { results: result } = {} }) {
-    this.setState(({ status }) => ({ result, status: { ...status, autocomplete: statusState.downloaded, list: <statusState className="downloaded"></statusState> }}))
+    this.setState(({ status }) => ({
+      result,
+      status: {
+        ...status,
+        autocomplete: statusState.downloaded,
+        list: statusState.downloaded
+      }
+    }))
   }
 
   handleListSuccess ({ data: { results } = {} }) {
-    this.setState(({ status, result }) => ({ result: [...result, ...results ], status: { ...status, list: statusState.downloaded }}))
+    this.setState(({ status, result }) => ({
+      result: [...result, ...results ],
+      status: { ...status, list: statusState.downloaded
+      }
+    }))
   }
 
   handleUpdateInput (searchText, dataSource, { source }) {

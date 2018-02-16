@@ -5,8 +5,11 @@ import styled from 'styled-components'
 import SadIcon from 'material-ui/svg-icons/social/sentiment-dissatisfied'
 import RightIcon from 'material-ui/svg-icons/hardware/keyboard-arrow-right'
 import FlatButton from 'material-ui/FlatButton'
+import CircularProgress from 'material-ui/CircularProgress'
 
 import ListItem from './ListItem/ListItem'
+
+import fetching from '../../hoc/fetching'
 
 const Container = styled.div`
   padding-bottom: 15px;
@@ -38,6 +41,7 @@ const NoResultsContainer = styled.div`
 
 const CenteredDiv = styled.div`
   text-align: center;
+  height: 60px;
 `
 
 const ListContainer = styled.div`
@@ -45,7 +49,7 @@ const ListContainer = styled.div`
   flex-wrap: wrap;
 `
 
-const NoResults = ({ searchPhrase }) => (
+const NoResultsComponent = ({ searchPhrase }) => (
   <NoResultsContainer>
     <div>
       Sorry, there are no results for {<b>{searchPhrase}</b>}...
@@ -54,29 +58,37 @@ const NoResults = ({ searchPhrase }) => (
   </NoResultsContainer>
 )
 
-const MovieList = ({ data, searchPhrase, onClick, onLoadMoreClick }) => (
+const NoResults = fetching(NoResults)
+
+const MovieList = ({ data, fetching, searchPhrase, onClick, onLoadMoreClick }) => (
   <div>
     <div>Results for {<b>{searchPhrase}</b>}</div>
     <ListContainer>
       {data.map((d, i) => <ListItem data={d} key={i} index={i} onClick={() => onClick(d)} />)}
     </ListContainer>
     <CenteredDiv>
-      <FlatButton
-        label="I want more!"
-        labelPosition="before"
-        icon={<RightIcon />}
-        onClick={onLoadMoreClick}
-      />
+      {
+        (!fetching)
+          ?
+            <FlatButton
+              label="I want more!"
+              labelPosition="before"
+              icon={<RightIcon />}
+              onClick={onLoadMoreClick}
+            />
+          :
+            <CircularProgress />
+      }
     </CenteredDiv>
   </div>
 )
 
-const List = ({ searchPhrase, data = [], onClick, onLoadMoreClick }) => (
+const List = ({ searchPhrase, data = [], fetching, onClick, onLoadMoreClick }) => (
   <Container>
     {
       (data.length)
         ? <MovieList searchPhrase={searchPhrase} data={data} onClick={onClick} onLoadMoreClick={onLoadMoreClick} />
-        : <NoResults searchPhrase={searchPhrase} />
+        : <NoResults searchPhrase={searchPhrase} fetching={fetching} />
     }
   </Container>
 )
