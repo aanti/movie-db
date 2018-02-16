@@ -56,35 +56,39 @@ const NoResultsComponent = ({ searchPhrase }) => (
 
 const NoResults = fetching(NoResultsComponent)
 
-const MovieList = ({ data, fetching, searchPhrase, onClick, onLoadMoreClick }) => (
+const MovieList = ({ data, fetching, searchPhrase, isMore, onClick, onLoadMoreClick }) => (
   <div>
     <div>Results for {<b>{searchPhrase}</b>}</div>
     <ListContainer>
       {data.map((d, i) => <ListItem data={d} key={i} index={i} onClick={() => onClick(d)} />)}
     </ListContainer>
-    <CenteredDiv>
-      {
-        (!fetching)
-          ?
-            <FlatButton
-              label="I want more!"
-              labelPosition="before"
-              icon={<RightIcon />}
-              onClick={onLoadMoreClick}
-            />
-          :
-            <CircularProgress />
-      }
-    </CenteredDiv>
+    {
+      (isMore) && (
+        <CenteredDiv>
+          {
+            (!fetching)
+              ?
+              <FlatButton
+                label="I want more!"
+                labelPosition="before"
+                icon={<RightIcon />}
+                onClick={onLoadMoreClick}
+              />
+              :
+              <CircularProgress />
+          }
+        </CenteredDiv>
+      )
+    }
   </div>
 )
 
-const List = ({ searchPhrase, data = [], fetching, onClick, onLoadMoreClick }) => (
+const List = ({ searchPhrase, data, fetching, ...rest }) => (
   <Container>
     {
       (data.length)
-        ? <MovieList searchPhrase={searchPhrase} data={data} onClick={onClick} onLoadMoreClick={onLoadMoreClick} />
-        : <NoResults searchPhrase={searchPhrase} fetching={fetching} />
+        ? <MovieList data={data} searchPhrase={searchPhrase} {...rest} />
+        : <NoResults data={data} searchPhrase={searchPhrase} fetching={fetching} />
     }
   </Container>
 )
@@ -93,6 +97,7 @@ List.propTypes = {
   searchPhrase: PropTypes.string,
   data: PropTypes.array,
   fetching: PropTypes.bool,
+  isMore: PropTypes.bool,
   onClick: PropTypes.func,
   onLoadMoreClick: PropTypes.func
 }

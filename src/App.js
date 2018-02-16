@@ -1,34 +1,8 @@
 import React, { Component } from 'react'
-import styled from 'styled-components'
 
-import AutoComplete from './components/AutoComplete/AutoComplete'
-import FetchedDetails from './components/Details/Details'
-import List from './components/List/List'
+import MainSection from './components/MainSection/MainSection'
 
-import fetching from './hoc/fetching'
 import { search, getMovie } from './api'
-
-const Details = fetching(FetchedDetails)
-
-const Header = styled.div`
-  background-color: #636363;
-  color: white;
-  padding: 20px;
-  font-size: 20px;
-`
-
-const MainSection = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  max-width: 1200px;
-  margin: 0px auto;
-  background-color: #e3e3e3;
-
-  > div {
-    margin: 20px 0 0;
-  }
-`
 
 function debounce(func, wait, immediate) {
   let timeout
@@ -80,15 +54,14 @@ class App extends Component {
         list: statusState.initial
       },
       result: [],
-      dataSource: [],
       details: null,
-      page: 1
+      page: 1,
+      isMore: true
     }
 
     this.handleSearch = debounce(this.handleSearch.bind(this), 250)
     this.handleClear = this.handleClear.bind(this)
-    this.handleAutoCompleteSuccess = this.handleAutoCompleteSuccess.bind(this)
-    this.handleListSuccess = this.handleListSuccess.bind(this)
+    this.handleSuccess = this.handleSuccess.bind(this)
     this.handleUpdateInput = this.handleUpdateInput.bind(this)
     this.handleNewRequest = this.handleNewRequest.bind(this)
     this.handleDetailsClose = this.handleDetailsClose.bind(this)
@@ -99,6 +72,7 @@ class App extends Component {
   handleClear () {
     this.setState({
       page: 1,
+      isMore: true,
       searchText: ''
     })
   }
@@ -109,7 +83,7 @@ class App extends Component {
         details: null,
         status: { ...status, list: statusState.fetching }
       }), () => {
-      search(searchText).then(this.handleListSuccess)
+      search(searchText).then(this.handleSuccess)
     })
   }
 
@@ -117,21 +91,13 @@ class App extends Component {
     this.setState({ details: null })
   }
 
-  handleAutoCompleteSuccess ({ data: { results: result } = {} }) {
-    this.setState(({ status }) => ({
-      result,
+  handleSuccess ({ data: { results: newResult } = {} }) {
+    this.setState(({ status, result }) => ({
+      result: [ ...result, ...newResult],
       status: {
         ...status,
         autocomplete: statusState.downloaded,
         list: statusState.downloaded
-      }
-    }))
-  }
-
-  handleListSuccess ({ data: { results } = {} }) {
-    this.setState(({ status, result }) => ({
-      result: [...result, ...results ],
-      status: { ...status, list: statusState.downloaded
       }
     }))
   }
@@ -151,14 +117,14 @@ class App extends Component {
   }
 
   handleSearch (searchText) {
-    this.setState({ page: 1 }, () => search(searchText).then(this.handleAutoCompleteSuccess))
+    this.setState({ page: 1 }, () => search(searchText).then(this.handleSuccess))
   }
 
   handleLoadMoreClick () {
     const { searchText } = this.state
     this.setState(
       ({ page }) => ({ page: page + 1 }),
-      () => search(searchText, this.state.page).then(this.handleListSuccess)
+      () => search(searchText, this.state.page).then(this.handleSuccess)
     )
   }
 
@@ -175,46 +141,19 @@ class App extends Component {
   }
 
   render() {
-    const { result, status, details, searchText } = this.state
     return (
-      <div>
-        <Header>
-          Search movie database
-        </Header>
-        <MainSection>
-          <AutoComplete
-            dataSource={result}
-            searchText={searchText}
-            fetching={status.autocomplete.fetching}
-            onUpdateInput={this.handleUpdateInput}
-            onNewRequest={this.handleNewRequest}
-            onButtonClick={this.handleFindButtonClick}
-            onClear={this.handleClear}
-          />
-          {
-            (details) && (
-              <Details
-                data={details}
-                result={result}
-                fetching={status.details.fetching}
-                onClose={this.handleDetailsClose}
-              />
-            )
-          }
-          {
-            (!details) && (searchText.length > 1) && (
-              <List
-                searchPhrase={searchText}
-                data={result}
-                fetching={status.list.fetching}
-                onClick={this.handleNewRequest}
-                onLoadMoreClick={this.handleLoadMoreClick}
-              />
-            )
-          }
-        </MainSection>
-      </div>
-    );
+      <MainSection
+        {...this.state}
+        onSearch={this.handleSearch}
+        onClear={this.handleClear}
+        onSuccess={this.handleSuccess}
+        onUpdateInput={this.handleUpdateInput}
+        onNewRequest={this.handleNewRequest}
+        onDetailsClose={this.handleDetailsClose}
+        onUFindButtonClick={this.handleFindButtonClick}
+        onLoadMoreClick={this.handleLoadMoreClick}
+      />
+    )
   }
 }
 
