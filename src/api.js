@@ -1,5 +1,3 @@
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 import axios from 'axios'
 
 const baseUrl = 'https://api.themoviedb.org/3'
@@ -12,5 +10,3 @@ function sendRequest (path, params = {}) {
 export const search = (query, page = 1) => sendRequest('/search/movie', { query, page })
 
 export const getMovie = (id) => sendRequest(`/movie/${id}`)
-
-export const getImages = (id) => sendRequest(`/movie/${id}/images`)

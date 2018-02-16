@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
@@ -16,10 +16,6 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-`
-
-const PhraseSpan = styled.span`
-  font-weight: 500;
 `
 
 const NoResultsContainer = styled.div`
@@ -58,7 +54,7 @@ const NoResultsComponent = ({ searchPhrase }) => (
   </NoResultsContainer>
 )
 
-const NoResults = fetching(NoResults)
+const NoResults = fetching(NoResultsComponent)
 
 const MovieList = ({ data, fetching, searchPhrase, onClick, onLoadMoreClick }) => (
   <div>
@@ -92,5 +88,13 @@ const List = ({ searchPhrase, data = [], fetching, onClick, onLoadMoreClick }) =
     }
   </Container>
 )
+
+List.propTypes = {
+  searchPhrase: PropTypes.string,
+  data: PropTypes.array,
+  fetching: PropTypes.bool,
+  onClick: PropTypes.func,
+  onLoadMoreClick: PropTypes.func
+}
 
 export default List

@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 
 import styled from 'styled-components'
@@ -32,5 +32,10 @@ const ListItem = ({ data: { title, release_date, overview }, onClick }) => (
     <Item label="overview" component={Ellipsed}>{overview}</Item>
   </Container>
 )
+
+ListItem.propTypes = {
+  data: PropTypes.object,
+  onClick: PropTypes.func
+}
 
 export default ListItem

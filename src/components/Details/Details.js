@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 
 import Paper from 'material-ui/Paper'
 import IconButton from 'material-ui/IconButton'
@@ -84,6 +84,11 @@ class Details extends Component {
       </StyledPaper>
     )
   }
+}
+
+Details.propTypes = {
+  data: PropTypes.object,
+  onClose: PropTypes.func
 }
 
 export default Details

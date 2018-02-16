@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
@@ -64,6 +64,12 @@ export const ItemComponent = ({ label = '', children, chipMode, component, ...re
     </div>
   </LabeledItem>
 )
+
+ItemComponent.propTypes = {
+  label: PropTypes.string,
+  chipMode: PropTypes.bool,
+  component: PropTypes.element
+}
 
 export const Item = renderIfHasData(ItemComponent)
 

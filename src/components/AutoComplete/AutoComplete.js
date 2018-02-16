@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 
 import styled from 'styled-components'
@@ -67,7 +67,7 @@ function filterDataSource (searchText) {
   return searchText !== ''
 }
 
-const AutoComplete = ({ className, fetching, dataSource = [], onButtonClick, onClear, searchText, ...rest }) => (
+const AutoComplete = ({ className, fetching, dataSource, searchText, onButtonClick, onClear, ...rest }) => (
   <Container className={className}>
     {
       (!!searchText.length) && (
@@ -92,6 +92,19 @@ const AutoComplete = ({ className, fetching, dataSource = [], onButtonClick, onC
     <RaisedButton onClick={onButtonClick}>FIND</RaisedButton>
   </Container>
 )
+
+AutoComplete.defaultProps = {
+  dataSource: []
+}
+
+AutoComplete.propTypes = {
+  className: PropTypes.string,
+  fetching: PropTypes.bool,
+  dataSource: PropTypes.array,
+  searchText: PropTypes.string,
+  onClick: PropTypes.func,
+  onClear: PropTypes.func
+}
 
 export default styled(AutoComplete)`
   position: relative;

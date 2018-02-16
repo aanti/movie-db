@@ -1,14 +1,12 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
 
-import TextField from 'material-ui/TextField'
-
 import AutoComplete from './components/AutoComplete/AutoComplete'
 import FetchedDetails from './components/Details/Details'
 import List from './components/List/List'
 
 import fetching from './hoc/fetching'
-import { search, getMovie, getImages } from './api'
+import { search, getMovie } from './api'
 
 const Details = fetching(FetchedDetails)
 
