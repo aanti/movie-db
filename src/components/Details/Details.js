@@ -67,8 +67,8 @@ const ItemArray = ({ children, chipMode }) => (
   </FlexHorizontal>
 )
 
-const ItemComponent = ({ label = '', children, chipMode }) => (
-  <LabeledItem>
+const ItemComponent = ({ label = '', children, chipMode, ...rest }) => (
+  <LabeledItem {...rest}>
     <div>{label}</div>
     <div>
       {
