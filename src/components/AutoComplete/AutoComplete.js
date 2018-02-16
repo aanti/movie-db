@@ -6,20 +6,19 @@ import styled from 'styled-components'
 import AutoCompleteMUI from 'material-ui/AutoComplete'
 import MenuItem from 'material-ui/MenuItem'
 import CircularProgress from 'material-ui/CircularProgress'
-import RaisedButton from 'material-ui/RaisedButton'
 import IconButton from 'material-ui/IconButton'
 import Paper from 'material-ui/Paper'
 import ClearIcon from 'material-ui/svg-icons/content/clear'
 
 const Container = styled(Paper)`
   padding: 20px;
-  background-color: gray !important;
+  background-color: #636363 !important;
   flex: 0 0 60px;
 `
 
 const StyledLoader = styled(CircularProgress)`
   position: absolute !important;
-  right: 132px;
+  right: 15px;
   top: 18px;
 `
 
@@ -35,15 +34,14 @@ const PrimaryText = styled.div`
 `
 
 const SearchDiv = styled.div`
-  margin-right: 50px;
   width: 340px;
 `
 
 const CloseIconDiv = styled.div`
   position: absolute;
-  left: -50px;
+  left: 0;
   svg {
-    fill: gray !important;
+    fill: darkgray !important;
   }
 `
 
@@ -89,7 +87,6 @@ const AutoComplete = ({ className, fetching, dataSource, searchText, onButtonCli
         (fetching) && <StyledLoader size={24} />
       }
     </SearchDiv>
-    <RaisedButton onClick={onButtonClick}>FIND</RaisedButton>
   </Container>
 )
 

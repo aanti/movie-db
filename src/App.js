@@ -11,7 +11,7 @@ import { search, getMovie } from './api'
 const Details = fetching(FetchedDetails)
 
 const Header = styled.div`
-  background-color: gray;
+  background-color: #636363;
   color: white;
   padding: 20px;
   font-size: 20px;
