@@ -30,7 +30,7 @@ const MainSectionDiv = styled.div`
 `
 
 const MainSection = ({ result, status, details, searchText, isMore, onSearch, onSuccess, ...handlers }) => {
-  const { onUpdateInput, onFindButtonClick, onNewRequest, onClear, onDetailsClose, onLoadMoreClick } = handlers
+  const { onUpdateInput, onNewRequest, onClear, onDetailsClose, onLoadMoreClick } = handlers
   return (
     <div>
       <Header>
@@ -43,7 +43,6 @@ const MainSection = ({ result, status, details, searchText, isMore, onSearch, on
           fetching={status.autocomplete.fetching}
           onUpdateInput={onUpdateInput}
           onNewRequest={onNewRequest}
-          onButtonClick={onFindButtonClick}
           onClear={onClear}
         />
         {

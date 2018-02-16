@@ -65,7 +65,7 @@ function filterDataSource (searchText) {
   return searchText !== ''
 }
 
-const AutoComplete = ({ className, fetching, dataSource, searchText, onButtonClick, onClear, ...rest }) => (
+const AutoComplete = ({ className, fetching, dataSource, searchText, onClear, ...rest }) => (
   <Container className={className}>
     {
       (!!searchText.length) && (
@@ -99,7 +99,6 @@ AutoComplete.propTypes = {
   fetching: PropTypes.bool,
   dataSource: PropTypes.array,
   searchText: PropTypes.string,
-  onClick: PropTypes.func,
   onClear: PropTypes.func
 }
 

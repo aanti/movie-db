@@ -65,26 +65,11 @@ class App extends Component {
     this.handleUpdateInput = this.handleUpdateInput.bind(this)
     this.handleNewRequest = this.handleNewRequest.bind(this)
     this.handleDetailsClose = this.handleDetailsClose.bind(this)
-    this.handleFindButtonClick = this.handleFindButtonClick.bind(this)
     this.handleLoadMoreClick = this.handleLoadMoreClick.bind(this)
   }
 
   handleClear () {
-    this.setState({
-      page: 1,
-      isMore: true,
-      searchText: ''
-    })
-  }
-
-  handleFindButtonClick () {
-    const { searchText } = this.state
-    this.setState(({ status }) => ({
-        details: null,
-        status: { ...status, list: statusState.fetching }
-      }), () => {
-      search(searchText).then(this.handleSuccess)
-    })
+    this.setState({ page: 1, isMore: true, searchText: '' })
   }
 
   handleDetailsClose () {
@@ -121,23 +106,19 @@ class App extends Component {
   }
 
   handleLoadMoreClick () {
-    const { searchText } = this.state
+    const { searchText, page } = this.state
     this.setState(
       ({ page }) => ({ page: page + 1 }),
-      () => search(searchText, this.state.page).then(this.handleSuccess)
+      () => search(searchText, page + 1).then(this.handleSuccess)
     )
   }
 
   handleNewRequest ({ id }) {
-    if (id) {
-      this.setState(({ status }) => ({ status: { ...status, details: statusState.fetching } }))
-      getMovie(id)
-        .then(({ data: details }) => {
-          this.setState(({ status }) => ({ details, status: {...status, details: statusState.downloaded }}))
-        })
-    } else {
-      this.handleFindButtonClick(this.state.searchText)
-    }
+    this.setState(({ status }) => ({ status: { ...status, details: statusState.fetching } }))
+    getMovie(id)
+      .then(({ data: details }) => {
+        this.setState(({ status }) => ({ details, status: {...status, details: statusState.downloaded }}))
+      })
   }
 
   render() {
@@ -150,7 +131,6 @@ class App extends Component {
         onUpdateInput={this.handleUpdateInput}
         onNewRequest={this.handleNewRequest}
         onDetailsClose={this.handleDetailsClose}
-        onUFindButtonClick={this.handleFindButtonClick}
         onLoadMoreClick={this.handleLoadMoreClick}
       />
     )
