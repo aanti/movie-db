@@ -9,14 +9,16 @@ import CircularProgress from 'material-ui/CircularProgress'
 import RaisedButton from 'material-ui/RaisedButton'
 import Paper from 'material-ui/Paper'
 
-const StyledLoader = styled(CircularProgress)`
-  //border: 1px solid orange;
-`
-
 const Container = styled(Paper)`
   padding: 20px;
   background-color: gray !important;
   flex: 0 0 60px;
+`
+
+const StyledLoader = styled(CircularProgress)`
+  position: absolute !important;
+  right: 132px;
+  top: 18px;
 `
 
 const SecondaryText = styled.span`
@@ -26,12 +28,13 @@ const SecondaryText = styled.span`
 
 const PrimaryText = styled.div`
   text-overflow: ellipsis;
-  max-width: 150px;
+  white-space: nowrap;
+  overflow: hidden;
 `
 
 const SearchDiv = styled.div`
-  margin-right: 20px;
-  width: 280px;
+  margin-right: 50px;
+  width: 340px;
 `
 
 function getPrimaryText (title) {
@@ -62,21 +65,19 @@ class AutoComplete extends Component {
     }
 
     this.handleUpdateInput = this.handleUpdateInput.bind(this)
-    this.handleNewRequest = this.handleNewRequest.bind(this)
+    this.handleButtonClick = this.handleButtonClick.bind(this)
   }
 
-  handleUpdateInput (searchText, b, { source }) {
-    console.log('AutoComplete: handleUpdateInput', searchText, b, source)
+  handleUpdateInput (searchText, dataset, { source }) {
     this.setState({
       searchText: source === 'change' ? searchText : ''
     }, () => { searchText && source === 'change' && this.props.onUpdateInput(searchText) })
   }
 
-  handleNewRequest (value, i) {
-    console.log('ITEM SELECTION!!!')
-    console.log(value)
-    const { onNewRequest } = this.props
-
+  handleButtonClick () {
+    const { onButtonClick } = this.props
+    const { searchText } = this.state
+    onButtonClick(searchText)
   }
 
   render () {
@@ -88,15 +89,16 @@ class AutoComplete extends Component {
             dataSource={dataSource.map(getMenuItem)}
             {...rest}
             searchText={this.state.searchText}
+            hintText="Start writing some text here"
             filter={filterDataSource}
             onUpdateInput={this.handleUpdateInput}
             fullWidth
           />
           {
-            fetching && <StyledLoader size={24} />
+            (fetching) && <StyledLoader size={24} />
           }
         </SearchDiv>
-        <RaisedButton>FIND</RaisedButton>
+        <RaisedButton onClick={this.handleButtonClick}>FIND</RaisedButton>
       </Container>
     )
   }
@@ -105,14 +107,9 @@ class AutoComplete extends Component {
 
 export default styled(AutoComplete)`
   position: relative;
-  width: 400px;
+  width: 440px;
   background-color: lightgray;
   display: flex;
   align-items: center;
   justify-content: center;
-  ${StyledLoader} {
-    right: 0px;
-    top: 8px;
-    position: absolute !important;
-  }
 `

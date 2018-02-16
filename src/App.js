@@ -6,11 +6,13 @@ import TextField from 'material-ui/TextField'
 
 import AutoComplete from './components/AutoComplete/AutoComplete'
 import FetchedDetails from './components/Details/Details'
+import FetchedList from './components/List/List'
 
 import fetching from './hoc/fetching'
 import { search, getMovie, getImages } from './api'
 
 const Details = fetching(FetchedDetails)
+const List = fetching(FetchedList)
 
 const Header = styled.div`
   background-color: gray;
@@ -26,7 +28,6 @@ const MainSection = styled.div`
   max-width: 800px;
   margin: 0px auto;
   background-color: #e3e3e3;
-  height: 100vh;
 
   > div {
     margin: 20px 0 0;
@@ -76,33 +77,45 @@ class App extends Component {
     super()
 
     this.state = {
-      result: [],
       status: {
         autocomplete: statusState.initial,
         details: statusState.initial,
         list: statusState.initial
       },
+      result: [],
       details: null,
-      searchResults: null
+      searchPhrase: ''
     }
 
-    this.handleSuccess = this.handleSuccess.bind(this)
+    this.handleAutoCompleteSuccess = this.handleAutoCompleteSuccess.bind(this)
+    this.handleListSuccess = this.handleListSuccess.bind(this)
     this.handleUpdateInput = debounce(this.handleUpdateInput.bind(this), 250)
     this.handleNewRequest = this.handleNewRequest.bind(this)
     this.handleDetailsClose = this.handleDetailsClose.bind(this)
+    this.handleFindButtonClick = this.handleFindButtonClick.bind(this)
+  }
+
+  handleFindButtonClick (searchPhrase) {
+    this.setState(({ status }) => ({details: null, searchPhrase, status: { ...status, list: statusState.fetching }}), () => {
+      search(searchPhrase).then(this.handleListSuccess)
+    })
   }
 
   handleDetailsClose () {
-    this.setState({ details: null })
+    this.setState({ details: null, searchPhrase: '' })
   }
 
-  handleSuccess ({ data: { results: result } = {} }) {
+  handleAutoCompleteSuccess ({ data: { results: result } = {} }) {
     this.setState(({ status }) => ({ result, status: { ...status, autocomplete: statusState.downloaded }}))
+  }
+
+  handleListSuccess ({ data: { results: result } = {} }) {
+    this.setState(({ status }) => ({ result, status: { ...status, list: statusState.downloaded }}))
   }
 
   handleUpdateInput (text) {
     this.setState(({ status }) => ({ status: { ...status, autocomplete: statusState.fetching }}))
-    search(text).then(this.handleSuccess)
+    search(text).then(this.handleAutoCompleteSuccess)
   }
 
   handleNewRequest ({ id }) {
@@ -114,7 +127,7 @@ class App extends Component {
   }
 
   render() {
-    const { result, status, details } = this.state
+    const { result, status, details, searchPhrase } = this.state
     return (
       <div>
         <Header>
@@ -126,10 +139,16 @@ class App extends Component {
             fetching={status.autocomplete.fetching}
             onUpdateInput={this.handleUpdateInput}
             onNewRequest={this.handleNewRequest}
+            onButtonClick={this.handleFindButtonClick}
           />
           {
             (details) && (
               <Details data={details} fetching={status.details.fetching} onClose={this.handleDetailsClose} />
+            )
+          }
+          {
+            (!details && status.list.downloaded && searchPhrase) && (
+              <List searchPhrase={searchPhrase} data={result} onClick={this.handleNewRequest} />
             )
           }
         </MainSection>
