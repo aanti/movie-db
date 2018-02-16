@@ -7,6 +7,8 @@ import IconButton from 'material-ui/IconButton'
 import ClearIcon from 'material-ui/svg-icons/content/clear'
 import Chip from 'material-ui/Chip'
 
+import renderIfHasData from '../../hoc/renderIfHasData'
+
 const ImageUrlBase = 'http://image.tmdb.org/t/p/w185//'
 
 const StyledPaper = styled(Paper)`
@@ -23,7 +25,7 @@ const LabeledItem = styled.div`
   padding: 20px 5px 5px;
   margin: 5px;
   position: relative;
-  min-width: 100px;
+  min-width: 140px;
   font-weight: ${({ primary }) => primary ? '500' : '400'};
   font-size: ${({ primary }) => primary ? '18px' : '14px'};
 
@@ -51,53 +53,81 @@ const StyledChip = styled(Chip)`
   margin-right: 5px !important;
 `
 
-const Item = ({ label = '', children, ...rest }) => (children)
-  ?
-    <LabeledItem {...rest}>
-      <div>{label}</div>
-      <div>{children}</div>
-    </LabeledItem>
-  :
-    null
+const StyledSpan = styled.span`
+  margin-right: 5px;
+`
 
-const GenreItem = ({ genres }) => (
+const ItemArray = ({ children, chipMode }) => (
   <FlexHorizontal>
     {
-      genres.map(({ name }) => <StyledChip>{name}</StyledChip>)
+      children.map(({ name }) => (
+        chipMode ? <StyledChip>{name}</StyledChip> : <StyledSpan>{name}</StyledSpan>
+      ))
     }
   </FlexHorizontal>
 )
 
+const ItemComponent = ({ label = '', children, chipMode }) => (
+  <LabeledItem>
+    <div>{label}</div>
+    <div>
+      {
+        (Array.isArray(children))
+          ? <ItemArray chipMode={chipMode}>{children}</ItemArray>
+          : children
+      }
+    </div>
+  </LabeledItem>
+)
 
-const Details = ({ data, onClose }) => {
-  const { title, genres = [], overview, original_Language, release_date, backdrop_path: imgPath, vote_average, tagline } = data
-  return (
-    <StyledPaper>
-      <StyledIconDiv>
-        <IconButton onClick={onClose}>
-          <ClearIcon />
-        </IconButton>
-      </StyledIconDiv>
-      <FlexHorizontal>
-        <div>
-          <img src={`${ImageUrlBase}${imgPath}`}/>
-        </div>
-        <div>
-          <Item label="title" primary>{title}</Item>
-          <Item label="tagline" primary>{tagline}</Item>
-        </div>
-      </FlexHorizontal>
-      <FlexHorizontal>
-        <Item label="vote avg." primary>{vote_average}</Item>
-        <Item label="genre">
-          <GenreItem genres={genres} />
-        </Item>
-        <Item label="overview">{overview}</Item>
-        <Item>{original_Language}</Item>
-        <Item label="release date">{release_date}</Item>
-      </FlexHorizontal>
-    </StyledPaper>
-  )
+const Item = renderIfHasData(ItemComponent)
+
+class Details extends Component {
+  constructor () {
+    super()
+    this.state = {
+      error: false
+    }
+    this.handleImgError = this.handleImgError.bind(this)
+  }
+
+  handleImgError () {
+    this.setState({ error: true })
+  }
+
+  render () {
+    const { error } = this.state
+    const { data, onClose } = this.props
+
+    return (
+      <StyledPaper>
+        <StyledIconDiv>
+          <IconButton onClick={onClose}>
+            <ClearIcon />
+          </IconButton>
+        </StyledIconDiv>
+        <FlexHorizontal>
+          <div>
+            {(!error) && <img src={`${ImageUrlBase}${data.backdrop_path}`} alt="" onError={this.handleImgError} />}
+          </div>
+          <div>
+            <Item label="title" primary>{data.title}</Item>
+            <Item label="tagline" primary>{data.tagline}</Item>
+          </div>
+        </FlexHorizontal>
+        <FlexHorizontal>
+          <Item label="vote avg." primary>{data.vote_average}</Item>
+          <Item label="genre" chipMode>{data.genres}</Item>
+          <Item label="overview">{data.overview}</Item>
+          <Item label="original language">{data.original_Language}</Item>
+          <Item label="release date">{data.release_date}</Item>
+          <Item label="homepage">{data.homepage}</Item>
+          <Item label="production countries">{data.production_countries}</Item>
+          <Item label="production companies">{data.production_companies}</Item>
+        </FlexHorizontal>
+      </StyledPaper>
+    )
+  }
 }
 
 export default Details

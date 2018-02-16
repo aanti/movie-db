@@ -16,6 +16,7 @@ const StyledLoader = styled(CircularProgress)`
 const Container = styled(Paper)`
   padding: 20px;
   background-color: gray !important;
+  flex: 0 0 60px;
 `
 
 const SecondaryText = styled.span`

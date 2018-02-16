@@ -5,9 +5,12 @@ import styled from 'styled-components'
 import TextField from 'material-ui/TextField'
 
 import AutoComplete from './components/AutoComplete/AutoComplete'
-import Details from './components/Details/Details'
+import FetchedDetails from './components/Details/Details'
 
+import fetching from './hoc/fetching'
 import { search, getMovie, getImages } from './api'
+
+const Details = fetching(FetchedDetails)
 
 const Header = styled.div`
   background-color: gray;
@@ -45,7 +48,7 @@ function debounce(func, wait, immediate) {
   }
 }
 
-const status = {
+const statusState = {
   initial: {
     fetching: false,
     downloaded: false,
@@ -74,7 +77,11 @@ class App extends Component {
 
     this.state = {
       result: [],
-      status: status.initial,
+      status: {
+        autocomplete: statusState.initial,
+        details: statusState.initial,
+        list: statusState.initial
+      },
       details: null,
       searchResults: null
     }
@@ -90,22 +97,24 @@ class App extends Component {
   }
 
   handleSuccess ({ data: { results: result } = {} }) {
-    this.setState({ result, status: status.downloaded })
+    this.setState(({ status }) => ({ result, status: { ...status, autocomplete: statusState.downloaded }}))
   }
 
   handleUpdateInput (text) {
-    this.setState({ status: status.fetching })
+    this.setState(({ status }) => ({ status: { ...status, autocomplete: statusState.fetching }}))
     search(text).then(this.handleSuccess)
   }
 
   handleNewRequest ({ id }) {
-    console.log('choose: ', id)
-    getMovie(id).then(({ data: details }) => { console.log(details); this.setState({ details }) })
-    getImages(id).then(data => { console.log(data) })
+    this.setState(({ status }) => ({ status: { ...status, details: statusState.fetching } }))
+    getMovie(id)
+      .then(({ data: details }) => {
+        this.setState(({ status }) => ({ details, status: {...status, details: statusState.downloaded }}))
+      })
   }
 
   render() {
-    const { result, status: { fetching }, details } = this.state
+    const { result, status, details } = this.state
     return (
       <div>
         <Header>
@@ -114,12 +123,14 @@ class App extends Component {
         <MainSection>
           <AutoComplete
             dataSource={result}
-            fetching={fetching}
+            fetching={status.autocomplete.fetching}
             onUpdateInput={this.handleUpdateInput}
             onNewRequest={this.handleNewRequest}
           />
           {
-            (details) && <Details data={details} onClose={this.handleDetailsClose} />
+            (details) && (
+              <Details data={details} fetching={status.details.fetching} onClose={this.handleDetailsClose} />
+            )
           }
         </MainSection>
       </div>
