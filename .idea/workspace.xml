@@ -2,18 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ec3b78db-c267-476a-aefe-bce2b07cf25a" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/components/AutoComplete/AutoComplete.test.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/components/Item/Item.test.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/components/List/List.test.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/App.js" afterPath="$PROJECT_DIR$/src/App.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/App.test.js" afterPath="$PROJECT_DIR$/src/App.test.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/AutoComplete/AutoComplete.js" afterPath="$PROJECT_DIR$/src/components/AutoComplete/AutoComplete.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/Item/Item.js" afterPath="$PROJECT_DIR$/src/components/Item/Item.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/List/List.js" afterPath="$PROJECT_DIR$/src/components/List/List.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/List/ListItem/ListItem.js" afterPath="$PROJECT_DIR$/src/components/List/ListItem/ListItem.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/List/ListItem/ListItem.test.js" afterPath="$PROJECT_DIR$/src/components/List/ListItem/ListItem.test.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/index.js" afterPath="$PROJECT_DIR$/src/index.js" />
     </list>
     <ignored path="movie-db.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -77,8 +67,8 @@
       <file leaf-file-name="App.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/App.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.34656084">
-              <caret line="138" column="10" selection-start-line="138" selection-start-column="10" selection-end-line="138" selection-end-column="10" />
+            <state vertical-scroll-proportion="0.34126985">
+              <caret line="82" column="41" selection-start-line="82" selection-start-column="41" selection-end-line="82" selection-end-column="41" />
               <folding />
             </state>
           </provider>
@@ -163,9 +153,9 @@
         <option value="$PROJECT_DIR$/src/components/AutoComplete/AutoComplete.js" />
         <option value="$PROJECT_DIR$/src/components/AutoComplete/AutoComplete.test.js" />
         <option value="$PROJECT_DIR$/src/index.js" />
-        <option value="$PROJECT_DIR$/src/App.js" />
         <option value="$PROJECT_DIR$/src/App.test.js" />
         <option value="$PROJECT_DIR$/src/components/Details/Details.test.js" />
+        <option value="$PROJECT_DIR$/src/App.js" />
       </list>
     </option>
   </component>
@@ -556,7 +546,13 @@
       <option name="project" value="LOCAL" />
       <updated>1518819803703</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="[Tests] Basic tests">
+      <created>1518884881938</created>
+      <option name="number" value="00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1518884881938</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -613,7 +609,8 @@
     <MESSAGE value="[Refactor] Unused button callback removed (no more &quot;Find&quot; button)" />
     <MESSAGE value="[Style] ListItem margin fix" />
     <MESSAGE value="[Tests] Basic configuration with Jest, Enzyme" />
-    <option name="LAST_COMMIT_MESSAGE" value="[Tests] Basic configuration with Jest, Enzyme" />
+    <MESSAGE value="[Tests] Basic tests" />
+    <option name="LAST_COMMIT_MESSAGE" value="[Tests] Basic tests" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -792,8 +789,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/App.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.34656084">
-          <caret line="138" column="10" selection-start-line="138" selection-start-column="10" selection-end-line="138" selection-end-column="10" />
+        <state vertical-scroll-proportion="0.34126985">
+          <caret line="82" column="41" selection-start-line="82" selection-start-column="41" selection-end-line="82" selection-end-column="41" />
           <folding />
         </state>
       </provider>

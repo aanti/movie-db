@@ -80,8 +80,8 @@ class App extends Component {
   }
 
   handleSuccess ({ data: { results: newResult } = {} }) {
-    this.setState(({ status, result }) => ({
-      result: [ ...result, ...newResult],
+    this.setState(({ status, result, page }) => ({
+      result: page > 1 ? [ ...result, ...newResult] : newResult,
       status: {
         ...status,
         autocomplete: statusState.downloaded,
