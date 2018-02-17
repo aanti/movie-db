@@ -16,6 +16,10 @@ If you want to run tests and make sure that everything works as expected, just t
 ````javascript
 yarn test
 ````
+or alternatively:
+````javascript
+npm test
+````
 
 Written in React with help of [Webpack](https://webpack.js.org/) module bunder,  [axios](https://github.com/axios/axios) for HTTP requests, composed of [Material-UI](http://www.material-ui.com/#/) components, styled with awesome [styled-components](https://www.styled-components.com) <3
 
