@@ -1,7 +1,10 @@
 import React, { Component } from 'react'
 
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
+
 import MainSection from './components/MainSection/MainSection'
 
+import muiTheme from './theme/theme'
 import { search, getMovie } from './api'
 
 function debounce(func, wait, immediate) {
@@ -123,16 +126,18 @@ class App extends Component {
 
   render() {
     return (
-      <MainSection
-        {...this.state}
-        onSearch={this.handleSearch}
-        onClear={this.handleClear}
-        onSuccess={this.handleSuccess}
-        onUpdateInput={this.handleUpdateInput}
-        onNewRequest={this.handleNewRequest}
-        onDetailsClose={this.handleDetailsClose}
-        onLoadMoreClick={this.handleLoadMoreClick}
-      />
+      <MuiThemeProvider muiTheme={muiTheme}>
+        <MainSection
+          {...this.state}
+          onSearch={this.handleSearch}
+          onClear={this.handleClear}
+          onSuccess={this.handleSuccess}
+          onUpdateInput={this.handleUpdateInput}
+          onNewRequest={this.handleNewRequest}
+          onDetailsClose={this.handleDetailsClose}
+          onLoadMoreClick={this.handleLoadMoreClick}
+        />
+      </MuiThemeProvider>
     )
   }
 }

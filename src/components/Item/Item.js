@@ -27,7 +27,7 @@ export const FlexHorizontal = styled.div`
   flex-wrap: wrap;
 `
 
-const StyledChip = styled(Chip)`
+export const StyledChip = styled(Chip)`
   margin-right: 5px !important;
 `
 
@@ -41,14 +41,14 @@ const StyledSpan = styled.span`
 export const ItemArray = ({ children, chipMode }) => (
   <FlexHorizontal>
     {
-      children.map(({ name }) => (
-        chipMode ? <StyledChip>{name}</StyledChip> : <StyledSpan>{name}</StyledSpan>
+      children.map(({ name }, i) => (
+        chipMode ? <StyledChip key={i}>{name}</StyledChip> : <StyledSpan key={i}>{name}</StyledSpan>
       ))
     }
   </FlexHorizontal>
 )
 
-const SingleItem = ({ component, children, ...rest }) => component
+export const SingleItem = ({ component, children, ...rest }) => component
   ? React.createElement(component, rest, children)
   : children
 

@@ -54,9 +54,9 @@ const NoResultsComponent = ({ searchPhrase }) => (
   </NoResultsContainer>
 )
 
-const NoResults = fetching(NoResultsComponent)
+export const NoResults = fetching(NoResultsComponent)
 
-const MovieList = ({ data, fetching, searchPhrase, isMore, onClick, onLoadMoreClick }) => (
+export const MovieList = ({ data, fetching, searchPhrase, isMore, onClick, onLoadMoreClick }) => (
   <div>
     <div>Results for {<b>{searchPhrase}</b>}</div>
     <ListContainer>
@@ -68,14 +68,14 @@ const MovieList = ({ data, fetching, searchPhrase, isMore, onClick, onLoadMoreCl
           {
             (!fetching)
               ?
-              <FlatButton
-                label="I want more!"
-                labelPosition="before"
-                icon={<RightIcon />}
-                onClick={onLoadMoreClick}
-              />
+                <FlatButton
+                  label="I want more!"
+                  labelPosition="before"
+                  icon={<RightIcon />}
+                  onClick={onLoadMoreClick}
+                />
               :
-              <CircularProgress />
+                <CircularProgress />
           }
         </CenteredDiv>
       )

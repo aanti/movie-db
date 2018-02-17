@@ -28,7 +28,7 @@ const Ellipsed = styled.div`
 const ListItem = ({ data: { title, release_date, overview }, onClick }) => (
   <Container onClick={onClick}>
     <Item primary>{title}</Item>
-    <Item label="year">{release_date.split('-')[0]}</Item>
+    <Item label="year">{release_date && release_date.split('-')[0]}</Item>
     <Item label="overview" component={Ellipsed}>{overview}</Item>
   </Container>
 )

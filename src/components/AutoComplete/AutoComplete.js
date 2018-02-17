@@ -16,7 +16,7 @@ const Container = styled(Paper)`
   flex: 0 0 60px;
 `
 
-const StyledLoader = styled(CircularProgress)`
+export const StyledLoader = styled(CircularProgress)`
   position: absolute !important;
   right: 15px;
   top: 18px;
