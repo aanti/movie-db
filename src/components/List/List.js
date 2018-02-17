@@ -45,6 +45,10 @@ const ListContainer = styled.div`
   flex-wrap: wrap;
 `
 
+/**
+ * NoResults
+ * - displayed when there's no data to show (based on entered searchText)
+ */
 const NoResultsComponent = ({ searchPhrase }) => (
   <NoResultsContainer>
     <div>
@@ -54,8 +58,20 @@ const NoResultsComponent = ({ searchPhrase }) => (
   </NoResultsContainer>
 )
 
+NoResultsComponent.propTypes = {
+  fetching: PropTypes.bool,
+  /**
+   * entered searchPhrase
+   */
+  searchPhrase: PropTypes.string
+}
+
 export const NoResults = fetching(NoResultsComponent)
 
+/**
+ * MovieList
+ * - displayed when there are some search results based on entered search phrase
+ */
 export const MovieList = ({ data, fetching, searchPhrase, isMore, onClick, onLoadMoreClick }) => (
   <div>
     <div>Results for {<b>{searchPhrase}</b>}</div>
@@ -83,6 +99,31 @@ export const MovieList = ({ data, fetching, searchPhrase, isMore, onClick, onLoa
   </div>
 )
 
+MovieList.propTypes = {
+  /**
+   * search results (stored in array)
+   */
+  data: PropTypes.array,
+  /**
+   * fetching flag
+   */
+  fetching: PropTypes.bool,
+  /**
+   * entered phrase
+   */
+  searchPhrase: PropTypes.string,
+  /**
+   * flag indicating if there's something more to fetch
+   */
+  isMore: PropTypes.bool,
+  onClick: PropTypes.func,
+  onLoadMoreClick: PropTypes.func
+}
+
+/**
+ * List
+ * - component displayed to show fetch results or information that there are no search results
+ */
 const List = ({ searchPhrase, data, fetching, ...rest }) => (
   <Container>
     {
@@ -94,9 +135,21 @@ const List = ({ searchPhrase, data, fetching, ...rest }) => (
 )
 
 List.propTypes = {
+  /**
+   * entered phrase
+   */
   searchPhrase: PropTypes.string,
+  /**
+   * search results (stored in array)
+   */
   data: PropTypes.array,
+  /**
+   * fetching flag
+   */
   fetching: PropTypes.bool,
+  /**
+   * flag indicating if there's something more to fetch
+   */
   isMore: PropTypes.bool,
   onClick: PropTypes.func,
   onLoadMoreClick: PropTypes.func

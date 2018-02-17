@@ -28,7 +28,10 @@ const MainSectionDiv = styled.div`
     margin: 20px 0 0;
   }
 `
-
+/**
+ * MainSection
+ * - main view component (child of **App**), gets all data from App state through props and passing them down
+ */
 const MainSection = ({ result, status, details, searchText, isMore, onSearch, onSuccess, ...handlers }) => {
   const { onUpdateInput, onNewRequest, onClear, onDetailsClose, onLoadMoreClick } = handlers
   return (

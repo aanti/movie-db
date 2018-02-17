@@ -86,9 +86,19 @@ class Details extends Component {
   }
 }
 
+Details.defaultProps = {
+  data: {}
+}
+
 Details.propTypes = {
+  /**
+   * Data with movie details
+   */
   data: PropTypes.object,
-  onClose: PropTypes.func
+  /**
+   * Callback fired after closing details element (by clicking "clear" icon at top right corner)
+   */
+  onClose: PropTypes.func.isRequired
 }
 
 export default Details

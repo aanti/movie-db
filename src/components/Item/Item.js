@@ -38,6 +38,11 @@ const StyledSpan = styled.span`
   }
 `
 
+
+/**
+ * ItemArray
+ * - renders  array of values (list of production companies, genres, etc.) in given mode (chipMode)
+ */
 export const ItemArray = ({ children, chipMode }) => (
   <FlexHorizontal>
     {
@@ -48,11 +53,38 @@ export const ItemArray = ({ children, chipMode }) => (
   </FlexHorizontal>
 )
 
+ItemArray.defaultProps = {
+  chipMode: false
+}
+
+ItemArray.propTypes = {
+  /**
+   * Flag indicating if array items should be rendered as chips (Chip element from Material-UI lib)
+   */
+  chipMode: PropTypes.bool
+}
+
+/**
+ * SingleItem
+ * - renders single data value (raw or wrapped in passed component)
+ */
+
 export const SingleItem = ({ component, children, ...rest }) => component
   ? React.createElement(component, rest, children)
   : children
 
-export const ItemComponent = ({ label = '', children, chipMode, component, ...rest }) => (
+SingleItem.propTypes = {
+  /**
+   * Component used to wrap children
+   */
+  component: PropTypes.element
+}
+
+/**
+ * ItemComponent
+ * - renders data value (ItemArray or SingleItem, based on value type)
+ */
+export const ItemComponent = ({ label, children, chipMode, component, ...rest }) => (
   <LabeledItem {...rest}>
     <div>{label}</div>
     <div>
@@ -65,9 +97,22 @@ export const ItemComponent = ({ label = '', children, chipMode, component, ...re
   </LabeledItem>
 )
 
+ItemComponent.defaultProps = {
+  label: ''
+}
+
 ItemComponent.propTypes = {
+  /**
+   * label for data field
+   */
   label: PropTypes.string,
+  /**
+   * Flag indicating if array items should be rendered as chips (Chip element from Material-UI lib)
+   */
   chipMode: PropTypes.bool,
+  /**
+   * Component used to wrap children
+   */
   component: PropTypes.element
 }
 

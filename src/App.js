@@ -45,6 +45,10 @@ const statusState = {
   }
 }
 
+/**
+ * Main app component, has global app state, which is passed through props to proper children components
+ */
+
 class App extends Component {
   constructor () {
     super()

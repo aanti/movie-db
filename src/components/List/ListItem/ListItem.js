@@ -25,6 +25,10 @@ const Ellipsed = styled.div`
   max-width: 200px;
 `
 
+/**
+ * ListItem
+ * - Single list item displayed on search results list
+ */
 const ListItem = ({ data: { title, release_date, overview }, onClick }) => (
   <Container onClick={onClick}>
     <Item primary>{title}</Item>
@@ -34,6 +38,9 @@ const ListItem = ({ data: { title, release_date, overview }, onClick }) => (
 )
 
 ListItem.propTypes = {
+  /**
+   * Single movie data
+   */
   data: PropTypes.object,
   onClick: PropTypes.func
 }
