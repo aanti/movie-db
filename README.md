@@ -25,4 +25,6 @@ Written in React with help of [Webpack](https://webpack.js.org/) module bunder, 
 
 Check also [documentation ](https://github.com/aanti/movie-db/blob/master/DOCUMENTATION.md).
 
+Note: For API request mechanism I'm using debounce (in order to decrease number of unnecessary API calls) with help of [David Walsh implementation](https://davidwalsh.name/javascript-debounce-function)
+
 Enjoy! &#9786;
