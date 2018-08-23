@@ -1,6 +1,7 @@
 
 This simple app can help you to browse one of the best movie databases: **[themoviedb.org](http://themoviedb.org)**  
   ![enter image description here](https://raw.githubusercontent.com/aanti/movie-db/master/public/screen-1.png)
+
 All you need to do to try it out is just:
 ````javascript
 yarn install
